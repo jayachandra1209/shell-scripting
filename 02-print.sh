@@ -8,3 +8,9 @@
 # we choose  to go with echo as it is reduces the syntax problems unlike printf.
 
 echo Hello world
+
+# escape sequences.
+
+## new line. (\n)
+
+echo -e "Hello devops,\nBye"
