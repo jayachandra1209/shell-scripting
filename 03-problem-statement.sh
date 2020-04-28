@@ -1,10 +1,10 @@
 #!/bin/bash
 
-echo "Following Countries are Lockdown"
-echo "1.China"
-echo "2.Italy"
-echo "3.India"
+echo -e "\e[33mFollowing Countries are Lockdown"
+echo -e "1.China"
+echo -e "2.Italy"
+echo -e "3.India\e[0m"
 
-echo "Following countries are not lock down"
-echo "1.USA"
-echo "2.Russia"
+echo -e "\e[34mFollowing countries are not lock down"
+echo -e "1.USA"
+echo -e "2.Russia\e[0m"
