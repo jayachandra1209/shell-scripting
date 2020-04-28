@@ -39,3 +39,20 @@ echo welcome, Today date is $DATE
 
 DATE=$(date +%F)
 echo welcome, Today date is $DATE
+
+ADD=$((100+20+10))
+echo $ADD
+
+## Due to limitations arithematic expressions may not use it all times.
+# problems are
+#1. base
+echo $((09+01))
+#2. Float
+echo $((99.99-9.09))
+## execute the above values you will get the errors. 
+
+## Alternative is bc command. We need to install this if we will use this bc command
+
+#Environment Variables.
+
+echo COURSE NAME=$COURSENAME
