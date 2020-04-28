@@ -7,7 +7,6 @@
 a=10 #number
 b=xyz #Character
 c=r100 #string
-d=20.90 #float
 
 ## Observation is :
 #Shell doesnot have data types, unlike other scripting langauges by default.
@@ -18,3 +17,25 @@ echo a=$a
 echo b = ${b}
 
 #both are above are same
+echo $a100
+echo ${a}100
+
+#And also braces used for arrays.
+
+#Requirement is : print welcome message along with todays date
+
+DATE=2020-03-28
+echo welcome, Today date is $DATE
+
+# The problem with above command is , printing same date for all the days.
+
+#so the varaible here is called static varaible(means no change), Static varaibles cant be the solution all the time
+
+# So we will use Dynamic Variable
+
+#Dynamic Variable are two typs:
+#1.Command Substitution  syntax is: a=$(command) or a=`command`
+#2.Arithematic Substitution Syntax is: a=$((arithematic expression))
+
+DATE=$(date +%F)
+echo welcome, Today date is $DATE
