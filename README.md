@@ -8,6 +8,8 @@
 3.Variables
 
 4.Inputs
+    read
+    special-variable
 
 5.Redirectors & Exit Status & Quotes
 
