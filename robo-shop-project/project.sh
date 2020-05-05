@@ -13,4 +13,4 @@ B="\e[1m"
 #N--> Nutralize the color
 #D-->varaibale for dim color
 #B-->Variable for bold color
-echo -e "${BB}[MONGO]${N}[INFO]${N} ${D}$(date +%F' '%T) ${B}MONGODB INSTALL${N}"
+echo -e "${BB}[MONGO]${N}[INFO]${N} ${D}$(date +%F' '%T)${N} ${D}${B}MONGODB INSTALL${N}"
