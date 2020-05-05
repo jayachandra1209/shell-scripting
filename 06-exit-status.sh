@@ -9,3 +9,4 @@
 
 ## System by default will store the last command of exit status in (?)questionmark varaibla.
  
+ exit 1
