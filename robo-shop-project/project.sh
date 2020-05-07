@@ -144,3 +144,28 @@ systemctl enable mysqld &>>$LOG_FILE
 systemctl start mysqld &>>$LOG_FILE 
 STAT $? "Starting MySQL Database"
 
+SERVICE_NAME=REDIS
+LOGGER INFO "Starting REDIS Setup"
+
+yum install epel-release yum-utils -y &>>$LOG_FILE 
+STAT $? "Installing EPEL & YUM UTILS Package"
+
+yum list installed | grep remi-release &>/dev/null
+case $? in
+0) 
+    STAT SKIP "Setting Up YUM Repos"
+    ;;
+*)
+    yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y &>>$LOG_FILE
+    STAT $? "Setting Up YUM Repos"
+    yum-config-manager --enable remi &>/dev/null
+    ;;
+esac
+
+yum install redis -y &>>$LOG_FILE
+STAT $? "Installing REDIS"
+
+systemctl enable redis &>>$LOG_FILE
+systemctl start redis &>>$LOG_FILE
+STAT $? "Starting REDIS Service"
+
