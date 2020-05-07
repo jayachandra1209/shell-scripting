@@ -40,6 +40,7 @@ if [ -z "$GIT_PASSWORD"]; then
  echo -e "\n $RB GIT_PASSWORD variable is missing, export GIT_PASSWORD and try again \n"
  exit 1
 fi 
+
 LOGGER() {
     
     case $1 in
@@ -85,15 +86,15 @@ STAT() {
 
 CLONE()
 {
-    mkdir -p /tmp/robo-shop
+    mkdir -p /tmp/robo-shop 
     cd /tmp/robo-shop
-    if [ -d "$1"]; then
+    if [ -d "$1" ]; then
      cd $1
-     git pull $>>$LOG_FILE
+     git pull &>>$LOG_FILE
      STAT $? "Pulling repositry"
     else
-    git clone https://${GIT_USER}:${GIT_PASSWORD}@gitlab.com/batch46/robo-shop/${1}.git
-    STAT $? "Cloning Repository"
+     git clone https://${GIT_USER}:${GIT_PASSWORD}@gitlab.com/batch46/robo-shop/${1}.git
+     STAT $? "Cloning Repository"
     fi
 }
 
