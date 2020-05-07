@@ -28,6 +28,7 @@ B="\e[0m\e[1m"
 
 LOG_FILE=/tmp/project.log
 rm -f LOG_FILE
+CLONE_MAIN_DIR=/tmp/robo-shop
 
 ## Check GIT credential variables
 
@@ -86,8 +87,8 @@ STAT() {
 
 CLONE()
 {
-    mkdir -p /tmp/robo-shop 
-    cd /tmp/robo-shop
+    mkdir -p $CLONE_MAIN_DIR
+    cd $CLONE_MAIN_DIR
     if [ -d "$1" ]; then
      cd $1
      git pull &>>$LOG_FILE
@@ -204,4 +205,17 @@ LOGGER INFO "Starting NGINX Setup"
 yum install nginx -y &>>$LOG_FILE
 stat $? "Installaing Nginx"
 
-CLONE nginx-webapp
+REPO_DIR=nginx-webapp
+CLONE $REPO_DIR
+
+
+cp $CLONE_MAIN_DIR/$REPO_DIR/nginx-localhost.conf /etc/nginx/nginx.conf &>>$LOG_FILE
+STAT $? "Updating Nginx Configuration"
+
+rm -rf /usr/share/nginx/html
+cp -r $CLONE_MAIN_DIR/$REPO_DIR/static /usr/share/nginx/html &>>$LOG_FILE
+STAT $? "Copying Nginx static content"
+
+systemctl enable nginx &>>$LOG_FILE
+systemctl start nginx &>>$LOG_FILE
+STAT $? "STarting Nginx Service"
