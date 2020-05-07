@@ -72,6 +72,13 @@ STAT() {
   esac
 }
 
+CLONE()
+{
+    mkdir -p /tmp/robo-shop
+    cd /tmp/robo-shop
+    git clone https://gitlab.com/batch46/robo-shop/${1}.git
+}
+
 ## Main Program
 SERVICE_NAME=MONGODB
 LOGGER INFO "Starting MongoDB Setup"
@@ -169,3 +176,13 @@ systemctl enable redis &>>$LOG_FILE
 systemctl start redis &>>$LOG_FILE
 STAT $? "Starting REDIS Service"
 
+
+
+
+SERVICE_NAME=NGINX
+LOGGER INFO "Starting NGINX Setup"
+
+yum install nginx -y &>>$LOG_FILE
+stat $? "Installaing Nginx"
+
+CLONE()
