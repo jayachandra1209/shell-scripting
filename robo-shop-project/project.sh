@@ -43,6 +43,8 @@ if [ -z "$GIT_PASSWORD" ]; then
 fi
 
 LOGGER() {
+
+    echo -e "${YB}------------------------ ** END OF $2 ** ----------------------------${N}" >>$LOG_FILE
     
     case $1 in
     INFO)
