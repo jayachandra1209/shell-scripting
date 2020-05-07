@@ -6,3 +6,11 @@
 # 1. String Comparisions 
   # Operators : =, ==, != , -z (varible empty), -n (not empty)
   # Ex: [ "abc" != "ABC" ] 
+
+  # 2. File Checks 
+  # Operators:
+    # -d to check directory
+    # -f to check regular file 
+    # -r to check readable permission 
+    ## Refer this URL for all the operators : https://www.tldp.org/LDP/abs/html/fto.html
+
