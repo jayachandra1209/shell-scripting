@@ -14,3 +14,8 @@
     # -r to check readable permission 
     ## Refer this URL for all the operators : https://www.tldp.org/LDP/abs/html/fto.html
 
+    # 3. Numercial Checks 
+  # Operators: -eq, -ne , -gt, -ge , -lt , -le 
+    # Ex: [ 1 -eq 2 ]
+
+
