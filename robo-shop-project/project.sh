@@ -37,7 +37,7 @@ if [ -z "$GIT_USER" ]; then
  exit 1
 fi
 
-if [ -z "$GIT_PASSWORD"]; then
+if [ -z "$GIT_PASSWORD" ]; then
  echo -e "\n $RB GIT_PASSWORD variable is missing, export GIT_PASSWORD and try again \n"
  exit 1
 fi
