@@ -93,7 +93,7 @@ CLONE()
      git pull &>>$LOG_FILE
      STAT $? "Pulling repositry"
     else
-     git clone https://${GIT_USER}:${GIT_PASSWORD}@gitlab.com/batch46/robo-shop/${1}.git
+     git clone https://${GIT_USER}:${GIT_PASSWORD}@gitlab.com/batch46/robo-shop/${1}.git &>>$LOG_FILE
      STAT $? "Cloning Repository"
     fi
 }
