@@ -185,4 +185,4 @@ LOGGER INFO "Starting NGINX Setup"
 yum install nginx -y &>>$LOG_FILE
 stat $? "Installaing Nginx"
 
-CLONE()
+
