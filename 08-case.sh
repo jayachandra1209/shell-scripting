@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-VALUE=10
+VALUE=20
 
 case $VALUE in 
   10) 
