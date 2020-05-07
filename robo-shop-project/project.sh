@@ -29,6 +29,17 @@ B="\e[0m\e[1m"
 LOG_FILE=/tmp/project.log
 rm -f LOG_FILE
 
+## Check GIT credential variables
+
+if [ -z "$GIT_USER"]; then
+ echo -e "\n $RB GIT_USER varaible is missing, export GIT_USER and try again \n"
+ exit 1
+fi 
+
+if [ -z "$GIT_PASSWORD"]; then
+ echo -e "\n $RB GIT_PASSWORD variable is missing, export GIT_PASSWORD and try again \n"
+ exit 1
+fi 
 LOGGER() {
     
     case $1 in
