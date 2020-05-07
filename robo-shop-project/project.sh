@@ -76,7 +76,7 @@ CLONE()
 {
     mkdir -p /tmp/robo-shop
     cd /tmp/robo-shop
-    git clone https://gitlab.com/batch46/robo-shop/${1}.git
+    git clone https://${GIT_USER}:${GIT_PASSWORD}@gitlab.com/batch46/robo-shop/${1}.git
 }
 
 ## Main Program
