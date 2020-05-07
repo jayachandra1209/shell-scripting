@@ -32,15 +32,15 @@ CLONE_MAIN_DIR=/tmp/robo-shop
 
 ## Check GIT credential variables
 
-if [ -z "$GIT_USER"]; then
+if [ -z "$GIT_USER" ]; then
  echo -e "\n $RB GIT_USER varaible is missing, export GIT_USER and try again \n"
  exit 1
-fi 
+fi
 
 if [ -z "$GIT_PASSWORD"]; then
  echo -e "\n $RB GIT_PASSWORD variable is missing, export GIT_PASSWORD and try again \n"
  exit 1
-fi 
+fi
 
 LOGGER() {
     
@@ -202,9 +202,8 @@ STAT $? "Starting REDIS Service"
 SERVICE_NAME=NGINX
 LOGGER INFO "Starting NGINX Setup"
 
-yum install nginx -y &>>$LOG_FILE
-stat $? "Installaing Nginx"
-
+yum install nginx -y &>>$LOG_FILE 
+STAT $? "Installaing Nginx"
 REPO_DIR=nginx-webapp
 CLONE $REPO_DIR
 
