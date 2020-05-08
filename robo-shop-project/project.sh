@@ -242,9 +242,9 @@ for app in CATALOGUE CART USER; do
   USERNAME=$(echo $SERVICE_NAME | tr [:upper:] [:lower:])
   id $USERNAME &>/dev/null
   if [ $? -eq 0 ]; then
-    STAT SKIP "Creating Application User"
+    STAT SKIP "Creating ${SERVICE_NAME} Application User"
   else
     useradd $USERNAME
-    STAT $? "Creating Application user"
+    STAT $? "Creating ${SERVICE_NAME} Application user"
   fi
 done
