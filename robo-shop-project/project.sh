@@ -302,6 +302,7 @@ yum install python36 gcc python3-devel -y &>>$LOG_FILE
 STAT $? "Installing Python3 & Deps"
 USERNAME=$(echo $SERVICE_NAME | tr [:upper:] [:lower:])
 APPNAME=$USERNAME
+id $USERNAME &>/dev/null
 if [ $? -eq 0 ]; then
         STAT SKIP "Creating ${SERVICE_NAME} Application User"
     else
@@ -309,7 +310,6 @@ if [ $? -eq 0 ]; then
         STAT $? "Creating ${SERVICE_NAME} Application user"
 fi
 CLONE $APPNAME "/home/$USERNAME"
-
 cd /home/$USERNAME/$APPNAME
 pip3 install -r requirements.txt &>>$LOG_FILE
 STAT $? "Installing Python Dependencies"
