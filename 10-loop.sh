@@ -15,3 +15,9 @@ for country in Kolkata Kuala_Lumpur Tokyo; do
   curl -s "http://worldtimeapi.org/api/timezone/Asia/$country" | jq .datetime
 done
 
+i=10
+
+while [ $i -gt 0 ]; do 
+  echo Iteration $i 
+  i=$(($i-1))
+done 
