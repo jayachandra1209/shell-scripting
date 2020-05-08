@@ -226,4 +226,5 @@ EOF
 
 for app in CATALOGUE CART USER; do
  SERVICE_NAME=$app
+ LOGGER INFO "Starting ${SERVICE_NAME} Setup"
 done
