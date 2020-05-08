@@ -116,7 +116,16 @@ INSTALL_NODEJS()
     STAT $? "INSTALL NODEJS"
 }
 
-<<EOF
+SERVICE_SETUP()
+{
+  cp /home/$USERNAME/$APPNAME/$APPNAME.service /etc/systemd/system/$APPNAME.service
+  systemctl daemon-reload 
+  systemctl enable $APPNAME &>>$LOG_FILE 
+  systemctl restart $APPNAME &>>$LOG_FILE 
+  STAT $? "Starting $SERVICE_NAME Service"
+
+}
+
 ## Main Program
 SERVICE_NAME=MONGODB
 LOGGER INFO "Starting MongoDB Setup"
@@ -237,7 +246,6 @@ systemctl enable nginx &>>$LOG_FILE
 systemctl start nginx &>>$LOG_FILE
 STAT $? "STarting Nginx Service"
 
-EOF
 
 for app in CATALOGUE CART USER; do
   SERVICE_NAME=$app
@@ -259,4 +267,50 @@ for app in CATALOGUE CART USER; do
   STAT $? "Install NodeJS Dependencies"
   chown -R $USERNAME:$USERNAME /home/$USERNAME
   mkdir -p /var/log/robo-shop/
+  SERVICE_SETUP
 done
+
+for app in SHIPPING DISPATCH; do
+    SERVICE_NAME=$app
+    LOGGER INFO "Starting ${SERVICE_NAME} setup"
+    if [ "$SERVICE_NAME" = "SHIPPING" ]; then
+        yum install java -y &>>$LOG_FILE
+        STAT $? "Installing Java"
+    fi
+    USERNAME=$(echo $SERVICE_NAME | tr [:upper:] [:lower:])
+    APPNAME=$USERNAME
+    id $USERNAME &>/dev/null
+    if [ $? -eq 0 ]; then
+        STAT SKIP "Creating ${SERVICE_NAME} Application User"
+    else
+        useradd $USERNAME
+        STAT $? "Creating ${SERVICE_NAME} Application user"
+    fi
+    CLONE $APPNAME "/home/$USERNAME"
+    chown -R $USERNAME:$USERNAME /home/$USERNAME
+
+    if [ "$SERVICE_NAME" = "DISPATCH" ]; then
+        chmod ugo+x /home/$APPNAME/$APPNAME/$APPNAME
+    fi
+    SERVICE_SETUP
+done
+
+SERVICE_NAME=PAYMENT
+LOGGER INFO "Starting ${SERVICE_NAME} Setup"
+
+yum install python36 gcc python3-devel -y &>>$LOG_FILE
+STAT $? "Installing Python3 & Deps"
+USERNAME=$(echo $SERVICE_NAME | tr [:upper:] [:lower:])
+APPNAME=$USERNAME
+if [ $? -eq 0 ]; then
+        STAT SKIP "Creating ${SERVICE_NAME} Application User"
+    else
+        useradd $USERNAME
+        STAT $? "Creating ${SERVICE_NAME} Application user"
+fi
+CLONE $APPNAME "/home/$USERNAME"
+
+cd /home/$USERNAME/$APPNAME
+pip3 install -r requirements.txt &>>$LOG_FILE
+STAT $? "Installing Python Dependencies"
+SERVICE_SETUP
