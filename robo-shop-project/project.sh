@@ -223,6 +223,7 @@ systemctl start nginx &>>$LOG_FILE
 STAT $? "STarting Nginx Service"
 
 EOF
+
 INSTALL_NODEJS()
 {
     which node &>>/dev/null
