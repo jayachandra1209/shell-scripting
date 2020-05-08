@@ -92,7 +92,7 @@ CLONE()
     if [ -z "$2" ]; then
         mkdir -p $CLONE_MAIN_DIR
     else 
-        local $CLONE_MAIN_DIR=$2
+        local CLONE_MAIN_DIR=$2
     fi
     cd $CLONE_MAIN_DIR
     if [ -d "$1" ]; then
