@@ -101,6 +101,7 @@ CLONE()
     fi
 }
 
+<<EOF
 ## Main Program
 SERVICE_NAME=MONGODB
 LOGGER INFO "Starting MongoDB Setup"
@@ -220,3 +221,9 @@ STAT $? "Copying Nginx static content"
 systemctl enable nginx &>>$LOG_FILE
 systemctl start nginx &>>$LOG_FILE
 STAT $? "STarting Nginx Service"
+
+EOF
+
+for app in CATALOGUE CART USER; do
+ SERVICE_NAME=$app
+done
