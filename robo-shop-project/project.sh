@@ -89,7 +89,11 @@ STAT() {
 
 CLONE()
 {
-    mkdir -p $CLONE_MAIN_DIR
+    if [ -z "$2" ]; then
+        mkdir -p $CLONE_MAIN_DIR
+    else 
+        local $CLONE_MAIN_DIR=$2
+    fi
     cd $CLONE_MAIN_DIR
     if [ -d "$1" ]; then
      cd $1
@@ -240,6 +244,7 @@ for app in CATALOGUE CART USER; do
   LOGGER INFO "Starting ${SERVICE_NAME} Setup"
   INSTALL_NODEJS
   USERNAME=$(echo $SERVICE_NAME | tr [:upper:] [:lower:])
+  APPNAME=$USERNAME
   id $USERNAME &>/dev/null
   if [ $? -eq 0 ]; then
     STAT SKIP "Creating ${SERVICE_NAME} Application User"
@@ -247,4 +252,11 @@ for app in CATALOGUE CART USER; do
     useradd $USERNAME
     STAT $? "Creating ${SERVICE_NAME} Application user"
   fi
+  cd /home/$USERNAME
+  CLONE $APPNAME "/home/$USERNAME"
+  cd /home/$USERNAME/$APPNAME
+  npm install &>>$LOG_FILE
+  STAT $? "Install NodeJS Dependencies"
+  chown -R $USERNAME:$USERNAME /home/$USERNAME
+  mkdir -p /var/log/robo-shop/
 done
