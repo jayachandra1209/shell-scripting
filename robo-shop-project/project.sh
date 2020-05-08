@@ -223,7 +223,16 @@ systemctl start nginx &>>$LOG_FILE
 STAT $? "STarting Nginx Service"
 
 EOF
-
+INSTALL_NODEJS()
+{
+    which node &>>/dev/null
+    if [$? -eq 0 ]; then
+    STAT SKIP "INSTALL NODEJS"
+    return
+    fi
+    curl -s https://raw.githubusercontent.com/linuxautomations/labautomation/master/tools/nodejs/install.sh | bash &>>$LOG_FILE
+    STAT $? "INSTALL NODEJS"
+}
 for app in CATALOGUE CART USER; do
  SERVICE_NAME=$app
  LOGGER INFO "Starting ${SERVICE_NAME} Setup"
